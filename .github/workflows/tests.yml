@@ -1,0 +1,47 @@
+name: Tests
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  tests:
+    runs-on: ubuntu-latest
+
+    services:
+      mysql:
+        image: mysql:8.0
+        env:
+          MYSQL_ROOT_PASSWORD: password
+          MYSQL_DATABASE: app_test
+        ports:
+          - 3306:3306
+        options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
+
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Setup PHP
+      uses: shivammathur/setup-php@v2
+      with:
+        php-version: '8.2'
+        extensions: mbstring, xml, ctype, iconv, intl, pdo_mysql
+        coverage: none
+
+    - name: Install dependencies
+      run: composer install --prefer-dist --no-progress
+
+    - name: Create test database
+      run: |
+        bin/console doctrine:database:create --env=test
+        bin/console doctrine:schema:create --env=test
+
+    - name: Run PHP unit tests
+      run: bin/phpunit
+
+    - name: Run JavaScript tests
+      run: |
+        npm install
+        npm test

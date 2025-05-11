@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ 'book.list.page_title'|trans }}{% endblock %}
+
+{% block body %}
+    {% set actions %}
+        <a href="{{ path('app_book_new') }}" class="btn btn-success">
+            <i class="fas fa-plus"></i> {{ 'book.action.add'|trans }}
+        </a>
+    {% endset %}
+    
+    {% include 'components/layout/_page_title.html.twig' with {
+        'title': 'book.list.title'|trans,
+        'actions': actions
+    } %}
+    
+    {% include 'components/book/_search.html.twig' %}
+    
+    {% include 'components/book/_list.html.twig' with {
+        'books': books|default([]),
+        'currentPage': currentPage|default(1),
+        'lastPage': lastPage|default(1),
+        'totalBooks': totalBooks|default(0)
+    } %}
+{% endblock %}

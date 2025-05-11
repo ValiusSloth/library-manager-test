@@ -1,0 +1,37 @@
+<div id="alert-container">
+    {% if app.session.flashBag.has('success') %}
+        {% for message in app.session.flashBag.get('success') %}
+            {% include 'components/alert/_alert.html.twig' with {
+                type: 'success',
+                message: message
+            } %}
+        {% endfor %}
+    {% endif %}
+    
+    {% if app.session.flashBag.has('error') %}
+        {% for message in app.session.flashBag.get('error') %}
+            {% include 'components/alert/_alert.html.twig' with {
+                type: 'danger',
+                message: message
+            } %}
+        {% endfor %}
+    {% endif %}
+    
+    {% if app.session.flashBag.has('warning') %}
+        {% for message in app.session.flashBag.get('warning') %}
+            {% include 'components/alert/_alert.html.twig' with {
+                type: 'warning',
+                message: message
+            } %}
+        {% endfor %}
+    {% endif %}
+    
+    {% if app.session.flashBag.has('info') %}
+        {% for message in app.session.flashBag.get('info') %}
+            {% include 'components/alert/_alert.html.twig' with {
+                type: 'info',
+                message: message
+            } %}
+        {% endfor %}
+    {% endif %}
+</div>

@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ 'book.edit.page_title'|trans }}{% endblock %}
+
+{% block body %}
+    {% include 'components/layout/_page_title.html.twig' with {
+        'title': 'book.edit.title'|trans({'%title%': book.title})
+    } %}
+    
+    {% set form_content %}
+        {% include 'components/book/_form_fields.html.twig' with {'form': form} %}
+    {% endset %}
+    
+    {% include 'components/form/_form_card.html.twig' with {
+        'title': 'book.edit.title'|trans({'%title%': book.title}),
+        'form': form,
+        'form_content': form_content,
+        'cancel_path': 'app_book_index',
+        'submit_label': 'book.action.update'|trans
+    } %}
+{% endblock %}

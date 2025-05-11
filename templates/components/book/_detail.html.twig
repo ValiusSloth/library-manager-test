@@ -1,0 +1,49 @@
+<div class="card">
+    <div class="card-header bg-info text-white">
+        <h5 class="card-title mb-0">{{ book.title }}</h5>
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-md-6">
+                <table class="table">
+                    <tr>
+                        <th>{{ 'book.field.title'|trans }}</th>
+                        <td>{{ book.title }}</td>
+                    </tr>
+                    <tr>
+                        <th>{{ 'book.field.author'|trans }}</th>
+                        <td>{{ book.author }}</td>
+                    </tr>
+                    <tr>
+                        <th>{{ 'book.field.isbn'|trans }}</th>
+                        <td>{{ book.isbn }}</td>
+                    </tr>
+                    <tr>
+                        <th>{{ 'book.field.publicationDate'|trans }}</th>
+                        <td>{{ book.publicationDate ? book.publicationDate|date('Y-m-d') : '' }}</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="card-footer">
+        <div class="d-flex justify-content-between">
+            <a href="{{ path('app_book_index') }}" class="btn btn-secondary">
+                <i class="fas fa-arrow-left me-1"></i> {{ 'action.back'|trans }}
+            </a>
+            <div>
+                <a href="{{ path('app_book_edit', {'id': book.id}) }}" class="btn btn-primary">
+                    <i class="fas fa-edit me-1"></i> {{ 'action.edit'|trans }}
+                </a>
+                <form method="post" action="{{ path('app_book_delete', {'id': book.id}) }}" class="d-inline">
+                    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ book.id) }}">
+                    <input type="hidden" name="_method" value="DELETE">
+                    <button type="submit" class="btn btn-danger delete-book-btn" 
+                            data-confirm="{{ 'book.delete.confirm'|trans }}">
+                        <i class="fas fa-trash me-1"></i> {{ 'action.delete'|trans }}
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

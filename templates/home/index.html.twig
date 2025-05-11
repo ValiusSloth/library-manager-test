@@ -1,0 +1,62 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Library Management System{% endblock %}
+
+{% block body %}
+<div class="container">
+    <div class="row min-vh-80 align-items-center text-center">
+        <div class="col-md-8 offset-md-2">
+            <div class="card shadow-lg border-0 p-5 mb-5">
+                <div class="card-body">
+                    <h1 class="display-4 fw-bold mb-4">Library Management System</h1>
+                    <p class="lead mb-4">
+                        Efficiently manage your library's book inventory, track books, and monitor borrowing.
+                    </p>
+                    
+                    {% if app.user %}
+                        <div class="d-grid gap-2 col-6 mx-auto">
+                            <a href="{{ path('app_book_index') }}" class="btn btn-primary btn-lg">View Book Inventory</a>
+                            <a href="{{ path('app_book_new') }}" class="btn btn-success btn-lg">Register New Book</a>
+                        </div>
+                    {% else %}
+                        <div class="d-grid gap-2 col-6 mx-auto">
+                            <a href="{{ path('app_login') }}" class="btn btn-primary btn-lg">Login</a>
+                            <a href="{{ path('app_register') }}" class="btn btn-outline-primary btn-lg">Create Account</a>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+            
+            <div class="row mt-5">
+                <div class="col-md-4">
+                    <div class="card h-100 shadow-sm">
+                        <div class="card-body text-center">
+                            <i class="fas fa-book fa-3x mb-3 text-primary"></i>
+                            <h3>Book Management</h3>
+                            <p>Register, update, and track your entire book collection.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card h-100 shadow-sm">
+                        <div class="card-body text-center">
+                            <i class="fas fa-users fa-3x mb-3 text-primary"></i>
+                            <h3>User Authentication</h3>
+                            <p>Secure access for library staff with proper permissions.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card h-100 shadow-sm">
+                        <div class="card-body text-center">
+                            <i class="fas fa-search fa-3x mb-3 text-primary"></i>
+                            <h3>Search & Filter</h3>
+                            <p>Quickly find books by title, author, genre, and more.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

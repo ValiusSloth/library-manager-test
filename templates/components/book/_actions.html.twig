@@ -1,0 +1,19 @@
+<div class="btn-group btn-group-sm">
+    <a href="{{ path('app_book_show', {'id': book.id}) }}" class="btn btn-info" title="{{ 'action.view'|trans }}">
+        <i class="fas fa-eye"></i>
+    </a>
+    <a href="{{ path('app_book_edit', {'id': book.id}) }}" class="btn btn-primary" title="{{ 'action.edit'|trans }}">
+        <i class="fas fa-edit"></i>
+    </a>
+    
+    {% if show_delete %}
+        <form method="post" action="{{ path('app_book_delete', {'id': book.id}) }}" class="d-inline">
+            <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ book.id) }}">
+            <input type="hidden" name="_method" value="DELETE">
+            <button type="submit" class="btn btn-danger delete-book-btn" title="{{ 'action.delete'|trans }}" 
+                    data-confirm="{{ 'book.delete.confirm'|trans }}">
+                <i class="fas fa-trash"></i>
+            </button>
+        </form>
+    {% endif %}
+</div>

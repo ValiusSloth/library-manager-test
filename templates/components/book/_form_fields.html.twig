@@ -1,0 +1,27 @@
+<div class="row mb-3">
+    <div class="col-md-6">
+        {{ form_row(form.title, {
+            label: 'book.field.title'|trans
+        }) }}
+    </div>
+    <div class="col-md-6">
+        {{ form_row(form.author, {
+            label: 'book.field.author'|trans
+        }) }}
+    </div>
+</div>
+
+<div class="row mb-3">
+    <div class="col-md-6">
+        {{ form_row(form.isbn, {
+            label: 'book.field.isbn'|trans
+        }) }}
+    </div>
+    <div class="col-md-6">
+        {{ form_row(form.publicationDate, {
+            label: 'book.field.publicationDate'|trans
+        }) }}
+    </div>
+</div>
+
+{{ form_rest(form) }}

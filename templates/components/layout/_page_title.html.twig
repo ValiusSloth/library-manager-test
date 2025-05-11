@@ -1,0 +1,8 @@
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h1>{{ title }}</h1>
+    {% if actions is defined %}
+        <div class="btn-toolbar">
+            {{ actions|raw }}
+        </div>
+    {% endif %}
+</div>

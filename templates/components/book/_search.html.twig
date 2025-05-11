@@ -1,0 +1,24 @@
+<div class="card mb-4">
+    <div class="card-body">
+        <div class="row">
+            <div class="col-md-8">
+                <div class="form-group">
+                    <label for="book-search" class="form-label">{{ 'book.search.label'|trans }}</label>
+                    <input type="text" id="book-search" class="form-control" placeholder="{{ 'book.search.placeholder'|trans }}">
+                    <small class="form-text text-muted">{{ 'book.search.help'|trans }}</small>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label for="page-size" class="form-label">{{ 'book.pagination.per_page'|trans }}</label>
+                    <select id="page-size" class="form-select">
+                        <option value="5" {{ app.request.query.get('limit') == 5 ? 'selected' : '' }}>5</option>
+                        <option value="10" {{ app.request.query.get('limit') == 10 or not app.request.query.has('limit') ? 'selected' : '' }}>10</option>
+                        <option value="25" {{ app.request.query.get('limit') == 25 ? 'selected' : '' }}>25</option>
+                        <option value="50" {{ app.request.query.get('limit') == 50 ? 'selected' : '' }}>50</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

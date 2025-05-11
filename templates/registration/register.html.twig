@@ -1,0 +1,55 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Register{% endblock %}
+
+{% block body %}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card shadow">
+                <div class="card-header bg-primary text-white">
+                    <h3 class="mb-0">Create an Account</h3>
+                </div>
+                <div class="card-body p-4">
+                    {% if form_errors(registrationForm) %}
+                        <div class="alert alert-danger">
+                            {{ form_errors(registrationForm) }}
+                        </div>
+                    {% endif %}
+                    
+                    {{ form_start(registrationForm) }}
+                        <div class="mb-3">
+                            {{ form_label(registrationForm.email, 'Email Address', {'label_attr': {'class': 'form-label'}}) }}
+                            {{ form_widget(registrationForm.email, {'attr': {'class': 'form-control', 'placeholder': 'name@example.com'}}) }}
+                            <div class="form-text">We'll never share your email with anyone else.</div>
+                            {{ form_errors(registrationForm.email) }}
+                        </div>
+                        
+                        <div class="mb-3">
+                            {{ form_label(registrationForm.plainPassword, 'Password', {'label_attr': {'class': 'form-label'}}) }}
+                            {{ form_widget(registrationForm.plainPassword, {'attr': {'class': 'form-control', 'placeholder': 'Choose a secure password'}}) }}
+                            <div class="form-text">Must be at least 6 characters long.</div>
+                            {{ form_errors(registrationForm.plainPassword) }}
+                        </div>
+                        
+                        <div class="mb-4 form-check">
+                            {{ form_widget(registrationForm.agreeTerms, {'attr': {'class': 'form-check-input'}}) }}
+                            {{ form_label(registrationForm.agreeTerms, 'I agree to the Terms of Service', {'label_attr': {'class': 'form-check-label'}}) }}
+                            {{ form_errors(registrationForm.agreeTerms) }}
+                        </div>
+                        
+                        <div class="d-grid">
+                            <button type="submit" class="btn btn-primary btn-lg">Register</button>
+                        </div>
+                    {{ form_end(registrationForm) }}
+                </div>
+                <div class="card-footer text-center py-3">
+                    <div class="text-muted">
+                        Already have an account? <a href="{{ path('app_login') }}" class="text-decoration-none">Sign in</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

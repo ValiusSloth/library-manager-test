@@ -1,0 +1,48 @@
+{% if lastPage > 1 %}
+    <nav aria-label="{{ 'pagination.aria_label'|trans }}">
+        <ul class="pagination justify-content-center">
+            <li class="page-item {{ currentPage == 1 ? 'disabled' : '' }}">
+                <a class="page-link" href="#" data-page="{{ currentPage - 1 }}" aria-label="{{ 'pagination.previous'|trans }}">
+                    <span aria-hidden="true">&laquo;</span>
+                </a>
+            </li>
+            
+            {% set startPage = max(1, currentPage - 2) %}
+            {% set endPage = min(lastPage, startPage + 4) %}
+            
+            {% if startPage > 1 %}
+                <li class="page-item">
+                    <a class="page-link" href="#" data-page="1">1</a>
+                </li>
+                {% if startPage > 2 %}
+                    <li class="page-item disabled">
+                        <span class="page-link">...</span>
+                    </li>
+                {% endif %}
+            {% endif %}
+            
+            {% for i in startPage..endPage %}
+                <li class="page-item {{ i == currentPage ? 'active' : '' }}">
+                    <a class="page-link" href="#" data-page="{{ i }}">{{ i }}</a>
+                </li>
+            {% endfor %}
+            
+            {% if endPage < lastPage %}
+                {% if endPage < lastPage - 1 %}
+                    <li class="page-item disabled">
+                        <span class="page-link">...</span>
+                    </li>
+                {% endif %}
+                <li class="page-item">
+                    <a class="page-link" href="#" data-page="{{ lastPage }}">{{ lastPage }}</a>
+                </li>
+            {% endif %}
+            
+            <li class="page-item {{ currentPage == lastPage ? 'disabled' : '' }}">
+                <a class="page-link" href="#" data-page="{{ currentPage + 1 }}" aria-label="{{ 'pagination.next'|trans }}">
+                    <span aria-hidden="true">&raquo;</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+{% endif %}

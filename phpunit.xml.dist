@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
-<!-- https://phpunit.readthedocs.io/en/latest/configuration.html -->
 <phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:noNamespaceSchemaLocation="vendor/phpunit/phpunit/phpunit.xsd"
          backupGlobals="false"
@@ -14,12 +12,23 @@
         <server name="APP_ENV" value="test" force="true" />
         <server name="SHELL_VERBOSITY" value="-1" />
         <server name="SYMFONY_PHPUNIT_REMOVE" value="" />
-        <server name="SYMFONY_PHPUNIT_VERSION" value="9.5" />
+        <server name="SYMFONY_PHPUNIT_VERSION" value="9.6" />
+        <env name="DATABASE_URL" value="postgresql://app:!ChangeMe!@database:5432/app_test?serverVersion=15&amp;charset=utf8" />
+        <!-- Disable browser in CI environment -->
+        <env name="PANTHER_NO_HEADLESS" value="0" />
+        <env name="PANTHER_CHROME_DRIVER_BINARY" value="" />
+        <env name="PANTHER_GECKO_DRIVER_BINARY" value="" />
     </php>
 
     <testsuites>
-        <testsuite name="Project Test Suite">
-            <directory>tests</directory>
+        <testsuite name="Unit">
+            <directory>tests/Unit</directory>
+        </testsuite>
+        <testsuite name="Integration">
+            <directory>tests/Integration</directory>
+        </testsuite>
+        <testsuite name="E2E">
+            <directory>tests/E2E</directory>
         </testsuite>
     </testsuites>
 
@@ -34,5 +43,6 @@
     </listeners>
 
     <extensions>
+        <extension class="DAMA\DoctrineTestBundle\PHPUnit\PHPUnitExtension" />
     </extensions>
 </phpunit>

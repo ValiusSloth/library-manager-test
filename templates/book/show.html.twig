@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ book.title }}{% endblock %}
+
+{% block body %}
+    {% include 'components/layout/_page_title.html.twig' with {
+        'title': book.title
+    } %}
+    
+    {% include 'components/book/_detail.html.twig' with {'book': book} %}
+{% endblock %}

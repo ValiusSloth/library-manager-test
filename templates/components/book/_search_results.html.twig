@@ -1,0 +1,17 @@
+{% if books|length > 0 %}
+    <div class="card mb-4">
+        <div class="card-header bg-success text-white">
+            <h5 class="card-title mb-0">{{ 'book.search.results'|trans }}</h5>
+        </div>
+        <div class="card-body">
+            {% include 'components/book/_table.html.twig' with {
+                books: books,
+                show_delete: false
+            } %}
+        </div>
+    </div>
+{% else %}
+    <div class="alert alert-info mb-4">
+        {{ 'book.search.no_results'|trans({'%term%': searchTerm}) }}
+    </div>
+{% endif %}
